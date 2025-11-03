@@ -211,5 +211,33 @@ function saveEntry() {
   loadEntries();
 }
 
+/**
+ * Highlights the current day in the schedule table
+ */
+function highlightCurrentDay() {
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const today = days[new Date().getDay()];
+  console.log("Today is:", today);
+
+  const scheduleRows = document.querySelectorAll("#scheduleBody tr");
+  scheduleRows.forEach((row) => {
+    const dayCell = row.querySelector("td:first-child");
+    if (dayCell && dayCell.textContent.trim() === today) {
+      row.classList.add("current-day");
+    }
+  });
+}
+
 // Load entries when the page loads
-document.addEventListener("DOMContentLoaded", loadEntries);
+document.addEventListener("DOMContentLoaded", () => {
+  loadEntries();
+  highlightCurrentDay();
+});

@@ -405,3 +405,24 @@ tbody tr:nth-child(even):hover {
 .flex-item-small {
   flex: 1 1 260px;
 }
+
+tbody tr.current-day {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.2),
+    rgba(6, 182, 212, 0.2)
+  ) !important;
+}
+
+tbody tr.current-day td {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+tbody tr.current-day:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.3),
+    rgba(6, 182, 212, 0.3)
+  ) !important;
+}
