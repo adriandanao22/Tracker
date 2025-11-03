@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Fitness Tracker</title>
+
+    <!-- Makes it behave like an app when added to home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Fitness Tracker" />
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>🏋️ My Fitness Tracker</h1>
+      <p>Quickly log workouts and meals — your private, offline tracker</p>
+    </header>
+
+    <div class="container">
+      <div class="section">
+        <h2>Schedule</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Workout</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody">
+            <tr>
+              <td>Monday</td>
+              <td>Cardio A</td>
+              
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+              <td>Workout A</td>
+            </tr>
+            </tr>
+            <tr>
+              <td>Wednesday</td>
+              <td>Cardio B</td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td>Workout B</td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>Cardio A</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>Workout A</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>Rest Day</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section flex-item-small">
+        <h2>Workout</h2>
+        <div class="radio-group">
+          <label class="radio" for="workout1">
+            <input type="radio" id="workout1" name="workout" value="Cardio A" />
+            <span>Cardio A</span>
+          </label>
+          <label class="radio" for="workout2">
+            <input type="radio" id="workout2" name="workout" value="Cardio B" />
+            <span>Cardio B</span>
+          </label>
+          <label class="radio" for="workout3">
+            <input
+              type="radio"
+              id="workout3"
+              name="workout"
+              value="Workout A"
+            />
+            <span>Workout A</span>
+          </label>
+          <label class="radio" for="workout4">
+            <input
+              type="radio"
+              id="workout4"
+              name="workout"
+              value="Workout B"
+            />
+            <span>Workout B</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex-item-small">
+        <div class="section">
+          <h2>Meals</h2>
+          <input type="text" id="meals" placeholder="What did you eat today?" />
+          <button id="saveBtn" onclick="saveEntry()">Save Entry</button>
+        </div>
+
+        <div class="section">
+          <h2>History</h2>
+          
+          <!-- Calendar Header -->
+          <div class="calendar-header">
+            <div class="calendar-nav">
+              <button onclick="prevMonth()">◀</button>
+              <button onclick="goToToday()">Today</button>
+              <button onclick="nextMonth()">▶</button>
+            </div>
+            <div id="monthYear"></div>
+          </div>
+          
+          <!-- Weekday Headers -->
+          <div class="calendar-weekdays">
+            <div class="weekday">Sun</div>
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+          </div>
+          
+          <!-- Calendar Grid -->
+          <div id="calendarGrid" class="calendar-grid"></div>
+          
+          <!-- Day Details Panel -->
+          <div id="dayDetails"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="app.js"></script>
+  </body>
+</html>

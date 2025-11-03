@@ -1,0 +1,407 @@
+/* Usage notes:
+   - Change the radio accent color by editing --accent in :root.
+   - Adjust radio size by changing the width/height in .radio input[type="radio"].
+*/
+
+:root {
+  --accent: #10b981;
+  --accent-secondary: #06b6d4;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  background: #020617;
+  color: var(--text-primary);
+  margin: 0;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+/* Section Cards */
+.section {
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary));
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+}
+
+/* Custom radio styles: visually clean, larger tap targets and accessible
+   - Adjust colors by changing the --accent variable above
+   - Keep inputs keyboard-accessible; :focus shows a visible ring
+*/
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.radio input[type="radio"] {
+  /* hide native appearance but keep it keyboard accessible */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  flex: 0 0 20px;
+  background: var(--bg-secondary);
+}
+
+.radio input[type="radio"]:focus {
+  outline: 3px solid rgba(16, 185, 129, 0.3);
+}
+
+.radio input[type="radio"]:checked {
+  border-color: var(--accent);
+  background: radial-gradient(
+    circle at center,
+    var(--accent) 50%,
+    transparent 51%
+  );
+}
+
+.radio:hover {
+  background: var(--bg-card-hover);
+}
+
+.radio span {
+  flex: 1 1 auto;
+}
+
+/* Inputs and Buttons */
+input,
+button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+input.radio {
+  width: auto;
+  margin-right: 8px;
+  align-items: center;
+}
+
+.section label {
+  text-align: center;
+}
+
+button {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  color: white;
+  border: none;
+  margin-top: 12px;
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* History Entries */
+.log-entry {
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px;
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary));
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+#history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Calendar Styles */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.calendar-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.calendar-nav button {
+  padding: 8px 12px;
+  margin: 0;
+  min-width: auto;
+  width: auto;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.calendar-nav button:hover {
+  background: var(--bg-card-hover);
+  transform: none;
+}
+
+#monthYear {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekday {
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+}
+
+.calendar-day.today {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+.calendar-day.has-entry {
+  background: linear-gradient(135deg, var(--bg-card), var(--accent-secondary));
+  border-color: var(--accent);
+}
+
+.calendar-day.has-entry:hover {
+  transform: scale(1.05);
+}
+
+.day-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.entry-indicator {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Day Details Panel */
+#dayDetails {
+  display: none;
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: auto;
+  margin: 0;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: var(--text-primary);
+  transform: none;
+}
+
+.detail-entry {
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  color: white;
+}
+
+th {
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 15px;
+}
+
+tbody tr {
+  background: var(--bg-card);
+  transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--bg-secondary);
+}
+
+tbody tr:nth-child(even):hover {
+  background: var(--bg-card-hover);
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  margin: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.header p {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+}
+
+/* Layout Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flex-item {
+  flex: 1 1 320px;
+}
+
+.flex-item-small {
+  flex: 1 1 260px;
+}
