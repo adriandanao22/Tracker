@@ -3,7 +3,7 @@
  * Enables offline functionality by caching app files
  */
 
-const CACHE_NAME = "fitness-tracker-v1";
+const CACHE_NAME = "fitness-tracker-v2";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -20,6 +20,8 @@ self.addEventListener("install", (event) => {
       return cache.addAll(urlsToCache);
     })
   );
+  // Force the waiting service worker to become active
+  self.skipWaiting();
 });
 
 // Activate event - clean up old caches
@@ -36,6 +38,8 @@ self.addEventListener("activate", (event) => {
       );
     })
   );
+  // Take control of all pages immediately
+  return self.clients.claim();
 });
 
 // Fetch event - serve from cache, fallback to network
